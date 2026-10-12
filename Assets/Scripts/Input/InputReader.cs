@@ -8,6 +8,12 @@ public interface IInputReader
     void EnablePlayerActions();
 }
 
+/// <summary>
+/// The SO that reads and disperses input events to all scripts
+/// Participating scripts should get a reference to the inputReader SO
+/// and subscibe to the necessary delegates. Be sure to call `EnablePlayerActions()`
+/// in Enable and `DisablePlayerActions()` in Disable.
+/// </summary>
 [CreateAssetMenu(fileName = "InputReader", menuName = "Input/Input Reader")]
 public class InputReader : ScriptableObject, IInputReader, IPlayerActions
 {
@@ -41,7 +47,7 @@ public class InputReader : ScriptableObject, IInputReader, IPlayerActions
     }
     
 
-    // This one is for thigns like "press _ to jump" if we need
+    // This one is for things like "press _ to jump" if we need
     public string GetInteractDisplayString()
     {
         if (inputActions == null)
