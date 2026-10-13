@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
         controller = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
 
-        reader.EnablePlayerActions();
+        // reader.EnablePlayerActions();
 
         Cursor.lockState = CursorLockMode.Locked;
         animator.SetBool("IsRunning", true);
@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnDisable()
     {
-        reader.DisablePlayerActions();
+        // reader.DisablePlayerActions();
     }
 
     private void Update()

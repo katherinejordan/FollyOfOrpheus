@@ -29,7 +29,8 @@ public class InputReader : ScriptableObject, IInputReader, IPlayerActions
     public Vector2 LookInput { get; private set; }
 
     public PlayerInputActions inputActions;
-
+    private void OnEnable() => EnablePlayerActions();
+    private void OnDisable() => DisablePlayerActions();
     public void EnablePlayerActions()
     {
         if (inputActions == null)
@@ -44,7 +45,7 @@ public class InputReader : ScriptableObject, IInputReader, IPlayerActions
     {
         if (inputActions != null)
         {
-            inputActions.Player.Disable();
+            inputActions.Disable();
         }
     }
 

@@ -12,13 +12,11 @@ public class TestingController : MonoBehaviour
     private void OnEnable()
     {
         inputReader.JumpPressed += OnSpace;
-        inputReader.EnablePlayerActions();
     }
 
     private void OnDisable()
     {
         inputReader.JumpPressed -= OnSpace;
-        inputReader.DisablePlayerActions();
     }
 
     private void OnSpace()
