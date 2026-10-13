@@ -113,6 +113,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a27e6026196f4300a98eeea9ac81497, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MouseSteeredRunner
-  forwardSpeed: 12
+  speed: 10
+  verticalSpeed: 0
   gravity: -20
-  mouseSensitivity: 2
+  mouseSens: 0.1
+  reader: {fileID: 11400000, guid: 2f7dcd2e15ae1d440957fb5fe3c6f17b, type: 2}
