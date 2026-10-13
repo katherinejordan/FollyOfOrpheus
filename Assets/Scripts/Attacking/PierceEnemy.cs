@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class PierceEnemy : Enemy
 {
-    private Vector3 piercePoint;
+    [SerializeField] private Transform pierceTransform;
+    private Vector3 piercePoint => pierceTransform.position;
 
     /// <summary>
     /// Returns the accuracy from 0-100 based on how close to center the position is

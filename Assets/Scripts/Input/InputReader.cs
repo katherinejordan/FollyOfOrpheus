@@ -20,6 +20,8 @@ public class InputReader : ScriptableObject, IInputReader, IPlayerActions
     public event UnityAction InteractPressed = delegate { };
     public event UnityAction InteractReleased = delegate { };
 
+    public event UnityAction JumpPressed = delegate { };
+
     public event UnityAction<Vector2> MoveChanged = delegate { };
     public event UnityAction<Vector2> LookChanged = delegate { };
 
@@ -45,7 +47,7 @@ public class InputReader : ScriptableObject, IInputReader, IPlayerActions
             inputActions.Player.Disable();
         }
     }
-    
+
 
     // This one is for things like "press _ to jump" if we need
     public string GetInteractDisplayString()
@@ -88,7 +90,13 @@ public class InputReader : ScriptableObject, IInputReader, IPlayerActions
             InteractReleased.Invoke();
         }
     }
-    public void OnJump(InputAction.CallbackContext context) { }
+    public void OnJump(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            JumpPressed.Invoke();
+        }
+    }
     public void OnLook(InputAction.CallbackContext context)
     {
         LookInput = context.ReadValue<Vector2>();

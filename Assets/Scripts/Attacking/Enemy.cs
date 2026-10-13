@@ -19,6 +19,7 @@ public abstract class Enemy : MonoBehaviour, IAttackable
         AttackDirection aDir = AttackDirectionFromVector2(dir);
         if (aDir == attackableDirection)
         {
+            player = boostable;
             AttackInternal(aDir, pos);
         }
     }
@@ -29,7 +30,7 @@ public abstract class Enemy : MonoBehaviour, IAttackable
         if (accuracy == 0) return;
 
         Boost(accuracy);
-        Die();
+        // Die();
     }
 
     protected abstract float GetAccuracy(Vector3 pos);
