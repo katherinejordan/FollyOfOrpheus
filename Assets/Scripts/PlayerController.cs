@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour
         // reader.DisablePlayerActions();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         transform.Rotate(Vector3.up, reader.LookInput.x);
 
