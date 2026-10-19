@@ -2,9 +2,6 @@ Shader "Custom/CutLine"
 {
     Properties
     {
-        _CutAngle ("Angle", Range(-180, 180)) = 0
-        _CutAxis ("Rotation Axis", Vector) = (0,0,1,0)
-        
         _Color ("Color", Color) = (1,0,0,1)
         _CutWidth ("Width", Float) = 0.05
         _CutHalfLength ("Half Length", Float) = 0.25
@@ -42,13 +39,6 @@ Shader "Custom/CutLine"
             struct VertexInput  { float4 positionOS : POSITION; };
             struct VertexOutput { float4 positionCS : SV_POSITION; float3 positionWS : TEXCOORD0; };
 
-            float3 RotateAroundAxis(float3 v, float3 axis, float degrees)
-            {
-                float a = radians(degrees);
-                float s = sin(a);
-                float c = cos(a);
-                return v * c + cross(axis, v) * s + axis * dot(axis, v) * (1 - c);
-            }
 
             VertexOutput vert(VertexInput IN)
             {
@@ -60,9 +50,7 @@ Shader "Custom/CutLine"
 
             half4 frag(VertexOutput IN) : SV_Target
             {
-                float3 axis = normalize(_CutAxis.xyz);
-                float3 planeNormal = RotateAroundAxis(normalize(_CutNormal.xyz), axis, _CutAngle);
-
+                float3 planeNormal = normalize(_CutNormal.xyz);
                 float dist = dot(IN.positionWS - _CutPoint.xyz, planeNormal);
                 float stroke = step(abs(dist), _CutWidth * 0.5);
                 return half4(_Color.rgb, _Color.a * stroke);
