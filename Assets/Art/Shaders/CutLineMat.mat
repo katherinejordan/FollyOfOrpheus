@@ -105,7 +105,7 @@ Material:
     - _ClearCoatSmoothness: 0
     - _Cull: 2
     - _CutHalfLength: 0.25
-    - _CutWidth: 0.01
+    - _CutWidth: 0.16
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
@@ -131,9 +131,9 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Color: {r: 0, g: 1, b: 1, a: 1}
-    - _CutNormal: {r: 0, g: 1, b: 0, a: 0}
-    - _CutPoint: {r: 0, g: 0, b: 0, a: 0}
+    - _Color: {r: 0.764151, g: 0.42251855, b: 0.39288893, a: 0.3882353}
+    - _CutNormal: {r: -1.12, g: 1, b: 0, a: 0}
+    - _CutPoint: {r: 0, g: 0.96, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
