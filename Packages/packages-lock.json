@@ -1,5 +1,14 @@
 {
   "dependencies": {
+    "com.clerin.unity.shader-ide-bridge-rider": {
+      "version": "https://github.com/jinhyeonseo01/UnityShaderIDEBridge-Rider.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.ide.rider": "3.0.39"
+      },
+      "hash": "dd7cc0d3b4e085003a5f641e9f8064bf5108c35a"
+    },
     "com.unity.ai.navigation": {
       "version": "2.0.10",
       "depth": 0,
