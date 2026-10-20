@@ -5,9 +5,8 @@ public class CutLine : MonoBehaviour
     [SerializeField] private Material cutLineMat;
     [SerializeField] private int cutLineMatIndex = 1;
     [SerializeField] private Transform viewer;
-    [SerializeField] private Vector2 cutPoint = new(0.5f, 0.5f); // in UV space
+    [SerializeField] private Vector3 cutPoint = new(0f, 1f, 0f); // in rest-pose mesh space
     private Vector3 worldSpacePoint;
-    private Vector2 uvNormal = Vector2.up;
     [SerializeField] private float width;
 
     private Renderer rend;
@@ -42,7 +41,7 @@ public class CutLine : MonoBehaviour
     {
         Vector3 toViewer = (viewer.position - worldSpacePoint).normalized;
         Vector3 n = Vector3.Cross(Vector3.up, toViewer);
-        return n.normalized;
+        return transform.InverseTransformDirection(n).normalized;
     }
 
 }

@@ -26,9 +26,6 @@ Shader "Custom/CutLine"
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 
             CBUFFER_START(UnityPerMaterial)
-                float  _CutAngle;
-                float4 _CutAxis;
-
                 float4 _Color;
                 float4 _CutPoint;
                 float4 _CutNormal;
@@ -36,22 +33,23 @@ Shader "Custom/CutLine"
                 float  _CutHalfLength;
             CBUFFER_END
 
-            struct VertexInput  { float4 positionOS : POSITION; };
-            struct VertexOutput { float4 positionCS : SV_POSITION; float3 positionWS : TEXCOORD0; };
+            // restPos: bind-pose object-space position, baked into UV1 by RestPositionUVPostprocessor
+            struct VertexInput  { float4 positionOS : POSITION; float3 restPos : TEXCOORD1; };
+            struct VertexOutput { float4 positionCS : SV_POSITION; float3 restPos : TEXCOORD0; };
 
 
             VertexOutput vert(VertexInput IN)
             {
                 VertexOutput OUT;
-                OUT.positionWS = TransformObjectToWorld(IN.positionOS.xyz);
-                OUT.positionCS = TransformWorldToHClip(OUT.positionWS);
+                OUT.positionCS = TransformObjectToHClip(IN.positionOS.xyz);
+                OUT.restPos = IN.restPos;
                 return OUT;
             }
 
             half4 frag(VertexOutput IN) : SV_Target
             {
                 float3 planeNormal = normalize(_CutNormal.xyz);
-                float dist = dot(IN.positionWS - _CutPoint.xyz, planeNormal);
+                float dist = dot(IN.restPos - _CutPoint.xyz, planeNormal);
                 float stroke = step(abs(dist), _CutWidth * 0.5);
                 return half4(_Color.rgb, _Color.a * stroke);
             }
