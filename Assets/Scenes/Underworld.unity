@@ -682,6 +682,7 @@ GameObject:
   - component: {fileID: 1759105683}
   - component: {fileID: 1759105682}
   - component: {fileID: 1759105681}
+  - component: {fileID: 1759105685}
   m_Layer: 0
   m_Name: TempFloor
   m_TagString: Untagged
@@ -736,7 +737,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 7cc90c6d91ceb4b10ae93c734ed1868c, type: 2}
+  - {fileID: 2100000, guid: 914bfbaaf3d9e48819548a0817561745, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -783,6 +784,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: -8.817, y: 0, z: 0}
+--- !u!114 &1759105685
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1759105680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 763462f0cc9b3476bb576c9b6c05dfb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TileTheMaterial
+  mat: {fileID: 2100000, guid: 914bfbaaf3d9e48819548a0817561745, type: 2}
+  size: 6
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
