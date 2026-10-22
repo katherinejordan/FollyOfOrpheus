@@ -251,7 +251,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 21.5
+  field of view: 60
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -277,8 +277,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 5.4927216e-18, y: -0.000000007473492, z: 4.104981e-26, w: 1}
-  m_LocalPosition: {x: -1.56209, y: 3.301, z: -22.78137}
+  m_LocalRotation: {x: 0.1029789, y: 9.15495e-39, z: -9.47806e-40, w: 0.99468356}
+  m_LocalPosition: {x: -1.56209, y: 3.301, z: -13.21137}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -586,7 +586,7 @@ MonoBehaviour:
       Size: {x: 0.8, y: 0.8}
       Offset: {x: 0, y: 0}
   CenterOnActivate: 1
-  TargetOffset: {x: 0, y: 0, z: 0}
+  TargetOffset: {x: 0, y: -0.09, z: 0}
   Damping: {x: 2, y: 2}
   Lookahead:
     Enabled: 0
@@ -607,11 +607,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineFollow
   TrackerSettings:
     BindingMode: 1
-    PositionDamping: {x: 1, y: 1, z: 1}
+    PositionDamping: {x: 0, y: 0, z: 0}
     AngularDampingMode: 0
     RotationDamping: {x: 1, y: 1, z: 1}
     QuaternionDamping: 1
-  FollowOffset: {x: 0, y: 0, z: -10}
+  FollowOffset: {x: 0, y: 0, z: -0.43}
 --- !u!114 &1240027644
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -636,7 +636,7 @@ MonoBehaviour:
     LookAtTarget: {fileID: 0}
     CustomLookAtTarget: 0
   Lens:
-    FieldOfView: 21.5
+    FieldOfView: 60
     OrthographicSize: 5
     NearClipPlane: 0.3
     FarClipPlane: 1000
@@ -663,8 +663,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1240027641}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0.000000007473492, z: 7.3496054e-10, w: 1}
-  m_LocalPosition: {x: -1.56209, y: 3.301, z: -22.78137}
+  m_LocalRotation: {x: 0.1029789, y: 4.528412e-39, z: 4.3740394e-38, w: 0.99468356}
+  m_LocalPosition: {x: -1.56209, y: 3.301, z: -13.21137}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
