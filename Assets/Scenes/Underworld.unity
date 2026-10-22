@@ -1410,7 +1410,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAttack
   reader: {fileID: 11400000, guid: 2f7dcd2e15ae1d440957fb5fe3c6f17b, type: 2}
-  hitpoint: {fileID: 0}
+  hitpoint: {fileID: 539384018}
   radius: 1
   enemyLayer:
     serializedVersion: 2
