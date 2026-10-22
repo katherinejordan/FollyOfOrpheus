@@ -28,6 +28,8 @@ public class InputReader : ScriptableObject, IInputReader, IPlayerActions
     public Vector2 MoveInput { get; private set; }
     public Vector2 LookInput { get; private set; }
 
+    public event UnityAction AttackPressed = delegate { };
+
     public PlayerInputActions inputActions;
     private void OnEnable() => EnablePlayerActions();
     private void OnDisable() => DisablePlayerActions();
@@ -78,7 +80,11 @@ public class InputReader : ScriptableObject, IInputReader, IPlayerActions
         MoveInput = context.ReadValue<Vector2>();
         MoveChanged.Invoke(MoveInput);
     }
-    public void OnAttack(InputAction.CallbackContext context) { }
+    public void OnAttack(InputAction.CallbackContext context)
+    {
+        if (context.performed) AttackPressed.Invoke();
+    }
+
     public void OnCrouch(InputAction.CallbackContext context) { }
     public void OnInteract(InputAction.CallbackContext context)
     {

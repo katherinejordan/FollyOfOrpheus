@@ -2,10 +2,11 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Animator), typeof(Rigidbody))]
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IBoostable
 {
     [Header("Player Prefs")]
     [SerializeField] private float speed = 10f;
+    [SerializeField] private float maxSpeed = 150;
     [SerializeField] private float mouseSens = 0.1f;
 
     [Header("Input")]
@@ -43,4 +44,10 @@ public class PlayerController : MonoBehaviour
         rb.linearVelocity = velocity;
     }
 
+    public void Boost(float boostAmount, AccuracyLevel level)
+    {
+        speed = Mathf.Clamp(speed + boostAmount, 0, maxSpeed);
+        Debug.Log($"Speed: {speed}");
+        Debug.Log($"Accuracy: {level}");
+    }
 }
