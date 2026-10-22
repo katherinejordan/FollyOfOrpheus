@@ -1,11 +1,11 @@
-using System.Drawing;
 using UnityEngine;
 
 public class SlashEnemy : Enemy
 {
-    private Vector3 slashPoint;
-
+    [SerializeField] private Transform slashTransform;
+    private Vector3 slashPoint => slashTransform.position;
     private Vector2 slashDir => Vector2FromAttackDirection(attackableDirection);
+    private Vector3 SlashDir3D => (transform.right * slashDir.x + transform.up * slashDir.y).normalized;
 
     protected override float GetAccuracy(Vector3 pos)
     {
@@ -17,9 +17,12 @@ public class SlashEnemy : Enemy
         return diff / maxDistance;
     }
     
-    // Should return distance of strike point to nearest point on the slash line
     private float DistanceToLine(Vector3 pos)
     {
-        return 0;
+        Vector3 dir = SlashDir3D;
+        Vector3 offset = pos - slashPoint;
+        float along = Vector3.Dot(offset, dir);
+        Vector3 closest = slashPoint + dir * along;
+        return Vector3.Distance(pos, closest);
     }
 }
