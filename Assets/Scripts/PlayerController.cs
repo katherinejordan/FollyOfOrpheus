@@ -50,4 +50,10 @@ public class PlayerController : MonoBehaviour, IBoostable
         Debug.Log($"Speed: {speed}");
         Debug.Log($"Accuracy: {level}");
     }
+
+    public void Slow(float missPenalty)
+    {
+        speed = Mathf.Clamp(speed - missPenalty, 0, maxSpeed);
+        Debug.Log($"Missing speed: {speed}");
+    }
 }
