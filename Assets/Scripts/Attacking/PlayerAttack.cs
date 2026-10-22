@@ -44,6 +44,7 @@ public class PlayerAttack : MonoBehaviour, IBoostable
 
     private IEnumerator AttackRoutine()
     {
+        controller.AttackBurst();
         isAttacking = true;
         attackHit = false;
 
@@ -60,7 +61,7 @@ public class PlayerAttack : MonoBehaviour, IBoostable
                     attackable.Attack(reader.MoveInput, hitpoint.position, this);
                 }
             }
-            
+
             if (attackHit) break;
             timer += Time.fixedDeltaTime;
             yield return new WaitForFixedUpdate();
