@@ -30,7 +30,7 @@ public abstract class Enemy : MonoBehaviour, IAttackable
         if (accuracy == 0) return;
 
         Boost(accuracy);
-        // Die();
+        Die();
     }
 
     protected abstract float GetAccuracy(Vector3 pos);
