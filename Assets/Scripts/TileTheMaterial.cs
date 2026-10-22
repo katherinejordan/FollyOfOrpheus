@@ -1,11 +1,16 @@
 using UnityEngine;
 
 [ExecuteAlways]
+[RequireComponent(typeof(Renderer))]
 public class TileTheMaterial : MonoBehaviour
 {
-    [SerializeField] private Material mat;
+    [SerializeField] private string textureProperty = "_BaseMap";
     [SerializeField] private float size = 1f;
 
+    private Renderer rend;
+    private MaterialPropertyBlock mpb;
+
+    private void OnEnable() => MapTiling();
     private void OnValidate() => MapTiling();
 
     private void Update()
@@ -19,13 +24,22 @@ public class TileTheMaterial : MonoBehaviour
 
     private void MapTiling()
     {
-        if (mat == null) mat = GetComponent<Renderer>().sharedMaterial;
-        if (mat == null || size <= 0f) return;
+        if (rend == null) rend = GetComponent<Renderer>();
+        if (rend == null || rend.sharedMaterial == null || size <= 0f) return;
+        if (!rend.sharedMaterial.HasProperty(textureProperty)) return;
 
-        Vector3 worldSize = GetComponent<Renderer>().bounds.size;
-        mat.mainTextureScale = new Vector2(worldSize.x / size, worldSize.z / size);
-#if UNITY_EDITOR
-        UnityEditor.EditorUtility.SetDirty(mat);
-#endif
+        mpb ??= new MaterialPropertyBlock();
+        rend.GetPropertyBlock(mpb);
+
+        Vector2 scale = new Vector2(transform.localScale.x / size, transform.localScale.z / size);
+        Vector2 offset = rend.sharedMaterial.GetTextureOffset(textureProperty);
+        mpb.SetVector(textureProperty + "_ST", new Vector4(scale.x, scale.y, offset.x, offset.y));
+
+        rend.SetPropertyBlock(mpb);
+    }
+
+    private void OnDisable()
+    {
+        if (rend != null) rend.SetPropertyBlock(null);
     }
 }
