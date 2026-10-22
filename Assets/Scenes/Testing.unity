@@ -293,63 +293,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &725036614
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: -8679921383154817045, guid: 9258aa4c256d7403083a96c0ab6f4ddb, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 11.49083
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 9258aa4c256d7403083a96c0ab6f4ddb, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 9258aa4c256d7403083a96c0ab6f4ddb, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.70809
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 9258aa4c256d7403083a96c0ab6f4ddb, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 9258aa4c256d7403083a96c0ab6f4ddb, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 9258aa4c256d7403083a96c0ab6f4ddb, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 9258aa4c256d7403083a96c0ab6f4ddb, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 9258aa4c256d7403083a96c0ab6f4ddb, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 9258aa4c256d7403083a96c0ab6f4ddb, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 9258aa4c256d7403083a96c0ab6f4ddb, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: 9258aa4c256d7403083a96c0ab6f4ddb, type: 3}
-      propertyPath: m_Name
-      value: Eurydice_Run_Cycle_(With_Hands)
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 9258aa4c256d7403083a96c0ab6f4ddb, type: 3}
 --- !u!1 &997647407
 GameObject:
   m_ObjectHideFlags: 0
@@ -1009,8 +952,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 763462f0cc9b3476bb576c9b6c05dfb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TileTheMaterial
-  mat: {fileID: 2100000, guid: 914bfbaaf3d9e48819548a0817561745, type: 2}
-  size: 8
+  textureProperty: _BaseMap
+  size: 1
 --- !u!64 &2056378017
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1115,4 +1058,3 @@ SceneRoots:
   - {fileID: 108588001}
   - {fileID: 338670082}
   - {fileID: 1336660092}
-  - {fileID: 725036614}
