@@ -1,4 +1,4 @@
-Shader "TextMeshPro/Distance Field" {
+Shader "TextMeshPro/ItsChromeChoom" {
 
 Properties {
 	_FaceTex			("Face Texture", 2D) = "white" {}
@@ -48,6 +48,11 @@ Properties {
 	_GlowInner			("Inner", Range(0,1)) = 0.05
 	_GlowOuter			("Outer", Range(0,1)) = 0.05
 	_GlowPower			("Falloff", Range(1, 0)) = 0.75
+
+	_RainbowSpeed		("Rainbow Speed", Float) = 0.3
+	_RainbowSpread		("Rainbow Spread", Float) = 0.04
+	_RainbowIntensity	("Rainbow Intensity", Float) = 1
+	_RainbowAngle		("Rainbow Angle", Range(-90,90)) = 15
 
 	_WeightNormal		("Weight Normal", float) = 0
 	_WeightBold			("Weight Bold", float) = 0.5
@@ -154,6 +159,7 @@ SubShader {
 		    #endif
 
 		    float4 textures			: TEXCOORD5;
+			float2 rainbowPos			: TEXCOORD6;
 		};
 
 		// Used by Unity internally to handle Texture Tiling and Offset.
@@ -162,6 +168,23 @@ SubShader {
 		float _UIMaskSoftnessX;
         float _UIMaskSoftnessY;
         int _UIVertexColorAlwaysGammaSpace;
+
+		float _RainbowSpeed;
+		float _RainbowSpread;
+		float _RainbowIntensity;
+		float _RainbowAngle;
+		
+
+		float3 RainbowColor(float2 pos)
+		{
+			float a = radians(_RainbowAngle);
+			float h = dot(pos, float2(cos(a), sin(a))) * _RainbowSpread - _Time.y * _RainbowSpeed;
+			float4 K = float4(1.0, 2.0 / 3.0, 1.0 / 3.0, 3.0);
+			float3 p = abs(frac(h + K.xyz) * 6.0 - K.www);
+			float3 rgb = saturate(p - K.xxx);
+			if (!IsGammaSpace()) rgb = GammaToLinearSpace(rgb);
+			return rgb * _RainbowIntensity;
+		}
 
 		pixel_t VertShader(vertex_t input)
 		{
@@ -238,6 +261,7 @@ SubShader {
 			output.underlayColor =	underlayColor;
 			#endif
 			output.textures = float4(faceUV, outlineUV);
+			output.rainbowPos = vert.xy;
 
 			return output;
 		}
@@ -261,10 +285,14 @@ SubShader {
 			float outline = (_OutlineWidth * _ScaleRatioA) * scale;
 			float softness = (_OutlineSoftness * _ScaleRatioA) * scale;
 
+			float3 rainbow = RainbowColor(input.rainbowPos);
+
 			half4 faceColor = _FaceColor;
 			half4 outlineColor = _OutlineColor;
 
 			faceColor.rgb *= input.color.rgb;
+			faceColor.rgb *= rainbow;
+			outlineColor.rgb *= rainbow;
 
 			faceColor *= tex2D(_FaceTex, input.textures.xy + float2(_FaceUVSpeedX, _FaceUVSpeedY) * _Time.y);
 			outlineColor *= tex2D(_OutlineTex, input.textures.zw + float2(_OutlineUVSpeedX, _OutlineUVSpeedY) * _Time.y);
@@ -302,6 +330,9 @@ SubShader {
 
 		    #if GLOW_ON
 			float4 glowColor = GetGlowColor(sd, scale);
+			glowColor.rgb = lerp(glowColor.rgb, rainbow, _GlowRainbow);
+			float pulse = 0.5 + 0.5 * sin(_Time.y * _GlowPulseSpeed * 6.2831853);
+			glowColor.a *= 1.0 - _GlowPulseAmount * pulse * step(0.0001, abs(_GlowPulseSpeed));
 			faceColor.rgb += glowColor.rgb * glowColor.a;
 		    #endif
 
@@ -322,5 +353,5 @@ SubShader {
 }
 
 Fallback "TextMeshPro/Mobile/Distance Field"
-CustomEditor "TMPro.EditorUtilities.TMP_SDFShaderGUI"
+CustomEditor "ChromeChoomShaderGUI"
 }

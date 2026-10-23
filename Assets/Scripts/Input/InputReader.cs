@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using static PlayerInputActions;
 
 public interface IInputReader
@@ -149,6 +150,14 @@ public class InputReader : ScriptableObject, IInputReader, IPlayerActions, IUIAc
     public void OnScrollWheel(InputAction.CallbackContext context) { }
     public void OnTrackedDevicePosition(InputAction.CallbackContext context) { }
     public void OnTrackedDeviceOrientation(InputAction.CallbackContext context) { }
+
+    public void OnRestart(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            SceneManager.LoadScene("Underworld");
+        }
+    }
 
     #endregion
 }
