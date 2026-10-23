@@ -42,6 +42,8 @@ public class PlayerController : MonoBehaviour, IBoostable
     [Header("Bad Practice BUT I DONT GIVE A GAF")]
     public SoundData attackSound1;
     public SoundData attackSound2;
+    public SoundData down;
+    public SoundData up;
     public void PlaySound(SoundData sound)
     {
         AudioManager.Instance?.Play(sound);
@@ -67,6 +69,11 @@ public class PlayerController : MonoBehaviour, IBoostable
         totalTurn = Mathf.Clamp(totalTurn, startAngle - 45f, startAngle + 45f);
 
         animator.SetFloat("Speed", speed / maxSpeed);
+
+        if (IsGrounded())
+        {
+            //here
+        }
     }
 
     private void FixedUpdate()
@@ -103,12 +110,15 @@ public class PlayerController : MonoBehaviour, IBoostable
                 burstVelocity = transform.forward * forwardBurst;
                 animator.CrossFadeInFixedTime("AttackForward", .05f);
                 PlaySound(attackSound1);
+
                 break;
             case AttackDirection.HORIZONTAL:
                 burstVelocity = transform.right * input.x * sideBurst;
                 string attack = input.x > 0 ? "AttackRight" : "AttackLeft";
                 animator.CrossFadeInFixedTime(attack, .05f);
                 PlaySound(attackSound1);
+                PlaySound(attackSound2);
+
                 break;
             case AttackDirection.VERTICAL:
                 burstVelocity = Vector3.zero;
@@ -117,18 +127,21 @@ public class PlayerController : MonoBehaviour, IBoostable
                 {
                     rb.AddForce(Vector3.up * input.y * burstVertical, ForceMode.VelocityChange);
                     addedForce = true;
+                    PlaySound(up);
+
                 }
                 else if (input.y < 0)
                 {
                     rb.AddForce(Vector3.up * input.y * burstVertical, ForceMode.VelocityChange);
                     addedForce = true;
+                    PlaySound(down);
 
                 }
                 if (addedForce)
                 {
                     attack = input.y > 0 ? "AttackUp" : "AttackDown";
                     animator.CrossFadeInFixedTime(attack, .05f);
-                    PlaySound(attackSound2);
+                    PlaySound(attackSound1);
                 }
                 break;
         }

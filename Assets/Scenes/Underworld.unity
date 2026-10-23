@@ -75011,7 +75011,7 @@ MonoBehaviour:
   mouseSens: 0.05
   sideBurst: 20
   forwardBurst: 10
-  burstVertical: 5
+  burstVertical: 8
   burstFade: 20
   rampTime: 5
   rampStartPercent: 0.084
@@ -75022,6 +75022,8 @@ MonoBehaviour:
   reader: {fileID: 11400000, guid: 2f7dcd2e15ae1d440957fb5fe3c6f17b, type: 2}
   attackSound1: {fileID: 11400000, guid: ee2b3b9005c8145ecba10e36e3004a75, type: 2}
   attackSound2: {fileID: 11400000, guid: bde11addefda841c4965916cd4a87eb1, type: 2}
+  down: {fileID: 11400000, guid: d51bebc54c771479e8d979a883e87754, type: 2}
+  up: {fileID: 11400000, guid: 1677675a6b8dc421ebf977fd5f997722, type: 2}
 --- !u!54 &1904166195
 Rigidbody:
   m_ObjectHideFlags: 0
