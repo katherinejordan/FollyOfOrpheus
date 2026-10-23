@@ -111,6 +111,8 @@ AudioMixerController:
     name: MusicVolume
   - guid: fe1412ee91721434cb24687eb1b7c1b2
     name: MusicSpeedVolume
+  - guid: 2bbe7aee0b9384057b13e637264b2227
+    name: MusicPitch
   - guid: b9a2df66e8efc4711a8586e66bd852f0
     name: SFXVolume
   - guid: 27afb1e89d6604b02bed72c58f5b2142
