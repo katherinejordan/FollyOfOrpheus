@@ -44,9 +44,18 @@ public class PlayerController : MonoBehaviour, IBoostable
     public SoundData attackSound2;
     public SoundData down;
     public SoundData up;
+    public SoundData run;
+    private AudioSource runSource;
     public void PlaySound(SoundData sound)
     {
         AudioManager.Instance?.Play(sound);
+    }
+
+    private void StopRun()
+    {
+        if (runSource == null) return;
+        runSource.Stop();
+        runSource = null;
     }
 
 
@@ -70,10 +79,22 @@ public class PlayerController : MonoBehaviour, IBoostable
 
         animator.SetFloat("Speed", speed / maxSpeed);
 
-        if (IsGrounded())
+        run.pitchRange = new Vector2(.45f + 2 * speed/maxSpeed, .5f + 2 *speed/maxSpeed);
+
+        if (IsGrounded() && Time.timeScale > 0f)
         {
-            //here
+            if (runSource == null || !runSource.isPlaying)
+                runSource = AudioManager.Instance?.Play(run);
         }
+        else
+        {
+            StopRun();
+        }
+    }
+
+    private void OnDisable()
+    {
+        StopRun();
     }
 
     private void FixedUpdate()

@@ -143,7 +143,7 @@ public class AudioManager : MonoBehaviour
         source.volume = sound.volume;
         source.pitch = sound.GetPitch();
         source.outputAudioMixerGroup = sound.mixerGroup;
-        source.loop = false;
+        source.loop = sound.loop;
 
         source.spatialBlend = positional ? sound.spatialBlend : 0f;
         source.rolloffMode = AudioRolloffMode.Logarithmic;

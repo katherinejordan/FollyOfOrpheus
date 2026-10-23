@@ -16,6 +16,7 @@ public class SoundData : ScriptableObject
     [Tooltip("Which mixer group this sound plays through (SFX, UI, Ambience...).")]
     public AudioMixerGroup mixerGroup;
     [Range(0f, 1f)] public float volume = 1f;
+    public bool loop;
 
     [Header("Variation")]
     [Tooltip("A random pitch between X (min) and Y (max) is picked each play. 1 = normal pitch.")]
