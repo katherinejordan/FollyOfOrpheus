@@ -15,7 +15,7 @@ public interface IInputReader
 /// in Enable and `DisablePlayerActions()` in Disable.
 /// </summary>
 [CreateAssetMenu(fileName = "InputReader", menuName = "Input/Input Reader")]
-public class InputReader : ScriptableObject, IInputReader, IPlayerActions
+public class InputReader : ScriptableObject, IInputReader, IPlayerActions, IUIActions
 {
     public event UnityAction InteractPressed = delegate { };
     public event UnityAction InteractReleased = delegate { };
@@ -32,8 +32,28 @@ public class InputReader : ScriptableObject, IInputReader, IPlayerActions
     public event UnityAction PausePressed = delegate { };
 
     public PlayerInputActions inputActions;
-    private void OnEnable() => EnablePlayerActions();
-    private void OnDisable() => DisablePlayerActions();
+    private void OnEnable() => EnableActions();
+    private void OnDisable() => DisableActions();
+    public void EnableActions()
+    {
+        if (inputActions == null)
+        {
+            inputActions = new PlayerInputActions();
+            inputActions.Player.SetCallbacks(this);
+            inputActions.UI.SetCallbacks(this);
+        }
+        inputActions.Enable();
+        inputActions.UI.Enable();
+        inputActions.Player.Enable();
+    }
+
+    public void DisableActions()
+    {
+        if (inputActions != null)
+        {
+            inputActions.Disable();
+        }
+    }
     public void EnablePlayerActions()
     {
         if (inputActions == null)
@@ -41,14 +61,14 @@ public class InputReader : ScriptableObject, IInputReader, IPlayerActions
             inputActions = new PlayerInputActions();
             inputActions.Player.SetCallbacks(this);
         }
-        inputActions.Enable();
+        inputActions.Player.Enable();
     }
 
     public void DisablePlayerActions()
     {
         if (inputActions != null)
         {
-            inputActions.Disable();
+            inputActions.Player.Disable();
         }
     }
 
@@ -116,8 +136,20 @@ public class InputReader : ScriptableObject, IInputReader, IPlayerActions
 
     public void OnPause(InputAction.CallbackContext context)
     {
-       if (context.performed) PausePressed.Invoke();
+        Debug.Log("hi");
+        if (context.performed) PausePressed.Invoke();
     }
+
+    public void OnNavigate(InputAction.CallbackContext context) { }
+    public void OnSubmit(InputAction.CallbackContext context) { }
+    public void OnCancel(InputAction.CallbackContext context) { }
+    public void OnPoint(InputAction.CallbackContext context) { }
+    public void OnClick(InputAction.CallbackContext context) { }
+    public void OnRightClick(InputAction.CallbackContext context) { }
+    public void OnMiddleClick(InputAction.CallbackContext context) { }
+    public void OnScrollWheel(InputAction.CallbackContext context) { }
+    public void OnTrackedDevicePosition(InputAction.CallbackContext context) { }
+    public void OnTrackedDeviceOrientation(InputAction.CallbackContext context) { }
 
     #endregion
 }
