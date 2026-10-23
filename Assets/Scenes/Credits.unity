@@ -1049,8 +1049,8 @@ MonoBehaviour:
 
 '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 0b5bb5f0f20384c35ade0050effeb441, type: 2}
-  m_sharedMaterial: {fileID: -8095874603541933260, guid: 0b5bb5f0f20384c35ade0050effeb441, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 32cad80a95bc94af28a6e1bb3e2dd213, type: 2}
+  m_sharedMaterial: {fileID: 6011287738903790976, guid: 32cad80a95bc94af28a6e1bb3e2dd213, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2337,6 +2337,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MainMenuManager
   mainMenu: {fileID: 0}
   settingsMenu: {fileID: 0}
+  reader: {fileID: 0}
 --- !u!114 &2086410606
 MonoBehaviour:
   m_ObjectHideFlags: 0
