@@ -9,7 +9,7 @@ public class MainMenuManager : MonoBehaviour
 
     private void OnEnable()
     {
-        reader.EnablePlayerActions();
+        if (reader) reader.EnablePlayerActions();
     }
     public void Play()
     {
