@@ -9,7 +9,8 @@ AudioMixerGroupController:
   m_Name: Music
   m_AudioMixer: {fileID: 24100000}
   m_GroupID: e3333fcb49ae9465db5467174ec2ea6d
-  m_Children: []
+  m_Children:
+  - {fileID: 5992102262777128620}
   m_Volume: 4cab91973265a4afabfc48adc982f965
   m_Pitch: 036bd9dd00b3b4a978eaa0621c51dd19
   m_Send: 00000000000000000000000000000000
@@ -39,6 +40,20 @@ AudioMixerGroupController:
   m_Mute: 0
   m_Solo: 0
   m_BypassEffects: 0
+--- !u!244 &-5300733068868704465
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: 65c4404ea965b42cd95315a3ddb0ef14
+  m_EffectName: Attenuation
+  m_MixLevel: ccdb5d9d292b643e29f8c50d038ad034
+  m_Parameters: []
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
 --- !u!243 &-3589853823177429023
 AudioMixerGroupController:
   m_ObjectHideFlags: 0
@@ -94,6 +109,8 @@ AudioMixerController:
     name: MasterVolume
   - guid: 4cab91973265a4afabfc48adc982f965
     name: MusicVolume
+  - guid: fe1412ee91721434cb24687eb1b7c1b2
+    name: MusicSpeedVolume
   - guid: b9a2df66e8efc4711a8586e66bd852f0
     name: SFXVolume
   - guid: 27afb1e89d6604b02bed72c58f5b2142
@@ -105,6 +122,7 @@ AudioMixerController:
     - adeec5c97817c4fdb90b32443041ba49
     - 9a9bead25dae54e1fa2d34eec6368b6b
     - 7f27e55ca9aa84517929cfbe9d6d9982
+    - 48800194b9900457295ef7d6a254219d
     name: View
   m_CurrentViewIndex: 0
   m_TargetSnapshot: {fileID: 24500006}
@@ -188,6 +206,25 @@ AudioMixerEffectController:
   m_SendTarget: {fileID: 0}
   m_EnableWetMix: 0
   m_Bypass: 0
+--- !u!243 &5992102262777128620
+AudioMixerGroupController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: MusicSpeed
+  m_AudioMixer: {fileID: 24100000}
+  m_GroupID: 48800194b9900457295ef7d6a254219d
+  m_Children: []
+  m_Volume: fe1412ee91721434cb24687eb1b7c1b2
+  m_Pitch: 2bbe7aee0b9384057b13e637264b2227
+  m_Send: 00000000000000000000000000000000
+  m_Effects:
+  - {fileID: -5300733068868704465}
+  m_UserColorIndex: 0
+  m_Mute: 0
+  m_Solo: 0
+  m_BypassEffects: 0
 --- !u!244 &7274418978598870096
 AudioMixerEffectController:
   m_ObjectHideFlags: 3

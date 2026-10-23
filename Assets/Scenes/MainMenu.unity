@@ -3366,26 +3366,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5415468328869512872, guid: 56075a2fa2ecc4de3a85b4a53efcdbbc, type: 3}
-      propertyPath: sceneMusic.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5415468328869512872, guid: 56075a2fa2ecc4de3a85b4a53efcdbbc, type: 3}
-      propertyPath: sceneMusic.Array.data[0].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: ae5afedb8c1d749c086b67c802ad600b, type: 3}
-    - target: {fileID: 5415468328869512872, guid: 56075a2fa2ecc4de3a85b4a53efcdbbc, type: 3}
-      propertyPath: sceneMusic.Array.data[0].sceneName
-      value: MainMenu
-      objectReference: {fileID: 0}
-    - target: {fileID: 5415468328869512872, guid: 56075a2fa2ecc4de3a85b4a53efcdbbc, type: 3}
-      propertyPath: sceneMusic.Array.data[1].sceneName
-      value: Underworld
-      objectReference: {fileID: 0}
-    - target: {fileID: 5415468328869512872, guid: 56075a2fa2ecc4de3a85b4a53efcdbbc, type: 3}
-      propertyPath: sceneMusic.Array.data[2].sceneName
-      value: Credits
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

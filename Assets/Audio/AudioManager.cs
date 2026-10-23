@@ -54,11 +54,8 @@ public class AudioManager : MonoBehaviour
     private AudioSource fadingOutSource;
     private Coroutine fadeRoutine;
 
-    // ---------------------------------------------------------------- setup
-
     private void Awake()
     {
-        // Singleton guard: duplicates (e.g. one placed in every scene) remove themselves.
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
@@ -66,7 +63,7 @@ public class AudioManager : MonoBehaviour
         }
 
         Instance = this;
-        DontDestroyOnLoad(gameObject); // only works on a ROOT object (no parent)
+        DontDestroyOnLoad(gameObject);
 
         BuildPool();
         BuildMusicSources();
@@ -76,13 +73,9 @@ public class AudioManager : MonoBehaviour
     private void Start()
     {
         if (Instance != this) return;
-
-        // Mixer values are set in Start (not Awake) because Unity can ignore
-        // mixer changes made during Awake.
         foreach (string param in AllParams)
             ApplyVolume(param, GetVolume(param));
 
-        // sceneLoaded doesn't fire for the scene we started in, so trigger it by hand.
         OnSceneLoaded(SceneManager.GetActiveScene(), LoadSceneMode.Single);
     }
 
@@ -126,8 +119,6 @@ public class AudioManager : MonoBehaviour
         return source;
     }
 
-    // SFX
-
     /// <summary>plays a sound in 2d(same volume everywhere).</summary>
     public AudioSource Play(SoundData sound)
     {
@@ -142,14 +133,11 @@ public class AudioManager : MonoBehaviour
 
     private AudioSource PlayInternal(SoundData sound, Vector3 position, bool positional)
     {
-        if (sound == null || !sound.HasClips) return null; // unassigned sounds are harmless
-
+        if (sound == null || !sound.HasClips) return null;
         AudioClip clip = sound.GetClip();
         if (clip == null) return null;
 
         AudioSource source = GetFreeSource();
-
-        // Pooled sources are reused, so EVERY setting is re-applied each time.
         source.transform.position = position;
         source.clip = clip;
         source.volume = sound.volume;
@@ -168,32 +156,25 @@ public class AudioManager : MonoBehaviour
 
     private AudioSource GetFreeSource()
     {
-        // 1. Prefer any source that isn't currently playing.
         foreach (AudioSource s in pool)
         {
             if (!s.isPlaying) return s;
         }
-
-        // 2. Pool is full: "steal" a source (cuts off whatever it was playing).
         AudioSource stolen = pool[nextStealIndex];
         nextStealIndex = (nextStealIndex + 1) % pool.Count;
         stolen.Stop();
         return stolen;
     }
 
-    // music
-
     /// <summary>Crossfades to a new music clip. Pass null to fade the music out.</summary>
     public void PlayMusic(AudioClip clip, float fadeTime = 1.5f)
     {
-        // Already playing (or fading in) this clip? Do nothing.
         if (clip != null && currentMusic != null && currentMusic.clip == clip) return;
         if (clip == null && currentMusic == null) return;
 
         if (fadeRoutine != null)
         {
             StopCoroutine(fadeRoutine);
-            // A fade was interrupted: cut off the track that was still fading out.
             if (fadingOutSource != null)
             {
                 fadingOutSource.Stop();
@@ -214,7 +195,6 @@ public class AudioManager : MonoBehaviour
 
         if (clip != null)
         {
-            // Use whichever of the two music sources isn't the current one.
             incoming = (outgoing == musicA) ? musicB : musicA;
             incoming.clip = clip;
             incoming.loop = true;
@@ -230,7 +210,7 @@ public class AudioManager : MonoBehaviour
 
         while (t < fadeTime)
         {
-            t += Time.unscaledDeltaTime; // keeps fading even if the game is paused
+            t += Time.unscaledDeltaTime;
             float k = Mathf.Clamp01(t / fadeTime);
 
             if (incoming != null) incoming.volume = k;
@@ -259,10 +239,7 @@ public class AudioManager : MonoBehaviour
                 return;
             }
         }
-        // No entry for this scene: current music just keeps playing.
     }
-
-    // volume
 
     /// <summary>Sets a mixer group's volume. value is 0 (silent) to 1 (full). Saved automatically.</summary>
     public void SetVolume(string parameter, float value)
@@ -278,9 +255,6 @@ public class AudioManager : MonoBehaviour
     private void ApplyVolume(string parameter, float value)
     {
         if (mixer == null) return;
-
-        // The mixer works in decibels (-80 = silent, 0 = full), so convert the slider's
-        // 0..1 value. Max() avoids Log10(0), which is negative infinity.
         float decibels = Mathf.Log10(Mathf.Max(value, 0.0001f)) * 20f;
 
         if (!mixer.SetFloat(parameter, decibels))

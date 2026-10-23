@@ -13,6 +13,12 @@ public class PlayerController : MonoBehaviour, IBoostable
     [SerializeField] private float burstVertical = 5;
     [SerializeField] private float burstFade = 20;
 
+    [Header("Start Ramp")]
+    [Tooltip("Seconds to reach full speed at the start of a run.")]
+    [SerializeField] private float rampTime = 3f;
+    [Tooltip("How fast you start, as a fraction of full speed (0.2 = 20%).")]
+    [SerializeField, Range(0f, 1f)] private float rampStartPercent = 0.2f;
+
     [Header("Ground Check")]
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private float distanceFromGround = 0.15f;
@@ -26,11 +32,17 @@ public class PlayerController : MonoBehaviour, IBoostable
     private float startAngle;
     private Vector3 velocity;
     private Vector3 burstVelocity;
+    private float rampTimer;
+    public float Speed => speed * RampFactor;
+    public float MinSpeed => minSpeed;
+    public float MaxSpeed => maxSpeed;
+    private float RampFactor => Mathf.SmoothStep(rampStartPercent, 1f, rampTimer / Mathf.Max(rampTime, 0.01f));
 
     private void OnEnable()
     {
         totalTurn = transform.eulerAngles.y; //stop from snapping to 0
         startAngle = totalTurn;
+        rampTimer = 0f;
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
         col = GetComponentInChildren<Collider>();
@@ -48,7 +60,8 @@ public class PlayerController : MonoBehaviour, IBoostable
     private void FixedUpdate()
     {
         rb.MoveRotation(Quaternion.Euler(0f, totalTurn, 0f));
-        velocity = transform.forward * speed + burstVelocity;
+        rampTimer += Time.fixedDeltaTime;
+        velocity = transform.forward * speed * RampFactor + burstVelocity;
         float currentFall = rb.linearVelocity.y;
         velocity.y = currentFall;
         rb.linearVelocity = velocity;
