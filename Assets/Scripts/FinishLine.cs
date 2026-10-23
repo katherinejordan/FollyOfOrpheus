@@ -14,7 +14,7 @@ public class FinishLine : MonoBehaviour
         {
             PlayerFinished.Invoke();
             isFinished = true;
-            Debug.Log("Finished!"); //Instead of this play the ending animation and then SceneManager.LoadScene("Credits")
+            Debug.Log("Finished!");
         }
     }
 }
