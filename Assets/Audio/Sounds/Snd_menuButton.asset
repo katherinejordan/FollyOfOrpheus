@@ -10,12 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6e37c44315d6640379d8585c2ceb2121, type: 3}
-  m_Name: Snd_buttonclick
+  m_Name: Snd_menuButton
   m_EditorClassIdentifier: Assembly-CSharp::SoundData
-  clips: []
-  mixerGroup: {fileID: 0}
+  clips:
+  - {fileID: 8300000, guid: 0748bcdb512a54866b61eafc67cdff4a, type: 3}
+  mixerGroup: {fileID: 348733905463198279, guid: d8fea968c259e4c509b72ac72a3a0f3c, type: 2}
   volume: 1
   pitchRange: {x: 0.95, y: 1.05}
-  spatialBlend: 1
+  spatialBlend: 0
   minDistance: 1
   maxDistance: 30
