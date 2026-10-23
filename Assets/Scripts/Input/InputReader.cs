@@ -29,6 +29,7 @@ public class InputReader : ScriptableObject, IInputReader, IPlayerActions
     public Vector2 LookInput { get; private set; }
 
     public event UnityAction AttackPressed = delegate { };
+    public event UnityAction PausePressed = delegate { };
 
     public PlayerInputActions inputActions;
     private void OnEnable() => EnablePlayerActions();
@@ -112,6 +113,11 @@ public class InputReader : ScriptableObject, IInputReader, IPlayerActions
     public void OnNext(InputAction.CallbackContext context) { }
     public void OnPrevious(InputAction.CallbackContext context) { }
     public void OnSprint(InputAction.CallbackContext context) { }
+
+    public void OnPause(InputAction.CallbackContext context)
+    {
+       if (context.performed) PausePressed.Invoke();
+    }
 
     #endregion
 }
