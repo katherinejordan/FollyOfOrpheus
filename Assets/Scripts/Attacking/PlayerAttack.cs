@@ -5,8 +5,7 @@ using UnityEngine;
 public class PlayerAttack : MonoBehaviour, IBoostable
 {
     [SerializeField] InputReader reader;
-    [SerializeField] Transform hitpoint;
-    [SerializeField] float radius = 1;
+    [SerializeField] BoxCollider hitbox;
     [SerializeField] LayerMask enemyLayer;
     [SerializeField] float windowLength = 0.25f;
     [SerializeField] float missPenalty = 5;
@@ -51,15 +50,20 @@ public class PlayerAttack : MonoBehaviour, IBoostable
 
         float timer = 0f;
 
+        Transform hitboxTransform = hitbox.transform;
+
         while (timer < windowLength)
         {
-            Collider[] colliders = Physics.OverlapSphere(hitpoint.position, radius, enemyLayer);
+            Vector3 center = hitboxTransform.TransformPoint(hitbox.center);
+            Vector3 halfExtents = Vector3.Scale(hitbox.size, hitboxTransform.lossyScale) * 0.5f;
+
+            Collider[] colliders = Physics.OverlapBox(center, halfExtents, hitboxTransform.rotation, enemyLayer);
             foreach (Collider col in colliders)
             {
                 if (col.TryGetComponent(out IAttackable attackable))
                 {
                     Debug.Log(col.name);
-                    attackable.Attack(reader.MoveInput, hitpoint.position, this);
+                    attackable.Attack(reader.MoveInput, center, this);
                 }
             }
 
