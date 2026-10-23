@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e37c44315d6640379d8585c2ceb2121, type: 3}
   m_Name: Snd_DeathSound
   m_EditorClassIdentifier: Assembly-CSharp::SoundData
-  clips: []
+  clips:
+  - {fileID: 8300000, guid: 03298cf2a3abf4fb6b08977235d06a74, type: 3}
   mixerGroup: {fileID: -7034742878424322906, guid: d8fea968c259e4c509b72ac72a3a0f3c, type: 2}
   volume: 1
+  loop: 0
   pitchRange: {x: 0.95, y: 1.05}
   spatialBlend: 1
   minDistance: 1

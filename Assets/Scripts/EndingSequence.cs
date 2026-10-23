@@ -6,6 +6,7 @@ public class EndingSequence : MonoBehaviour
 {
     [SerializeField] private GameObject panel;
     [SerializeField] private FinishLine finishLine;
+    [SerializeField] private InputReader reader;
     [SerializeField] private float timeToWait; //put the animation clip length here
 
     private void OnEnable()
@@ -29,6 +30,7 @@ public class EndingSequence : MonoBehaviour
 
     private void GoToCredits()
     {
+        reader.DisablePlayerActions();
         StartCoroutine(CreditsCoroutine());
     }
 

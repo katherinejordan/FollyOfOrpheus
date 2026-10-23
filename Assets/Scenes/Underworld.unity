@@ -28092,30 +28092,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1151726533}
     m_Modifications:
-    - target: {fileID: 9142570340206917765, guid: 5d1b44018ffe9485a93aa9685a1c7f91, type: 3}
-      propertyPath: speed
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 9142570340206917765, guid: 5d1b44018ffe9485a93aa9685a1c7f91, type: 3}
-      propertyPath: maxSpeed
-      value: 200
-      objectReference: {fileID: 0}
-    - target: {fileID: 9142570340206917765, guid: 5d1b44018ffe9485a93aa9685a1c7f91, type: 3}
-      propertyPath: burstSize
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 9142570340206917765, guid: 5d1b44018ffe9485a93aa9685a1c7f91, type: 3}
-      propertyPath: burstVertical
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 9142570340206917765, guid: 5d1b44018ffe9485a93aa9685a1c7f91, type: 3}
-      propertyPath: distanceFromGround
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9142570340206917765, guid: 5d1b44018ffe9485a93aa9685a1c7f91, type: 3}
-      propertyPath: groundLayer.m_Bits
-      value: 128
-      objectReference: {fileID: 0}
     - target: {fileID: 4882720805550125282, guid: 1bf24705fde2a4153b469ca0687fad92, type: 3}
       propertyPath: m_Name
       value: TempEnemy (3)
@@ -28159,6 +28135,30 @@ PrefabInstance:
     - target: {fileID: 6686719259775446605, guid: 1bf24705fde2a4153b469ca0687fad92, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9142570340206917765, guid: 5d1b44018ffe9485a93aa9685a1c7f91, type: 3}
+      propertyPath: speed
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 9142570340206917765, guid: 5d1b44018ffe9485a93aa9685a1c7f91, type: 3}
+      propertyPath: maxSpeed
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 9142570340206917765, guid: 5d1b44018ffe9485a93aa9685a1c7f91, type: 3}
+      propertyPath: burstSize
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 9142570340206917765, guid: 5d1b44018ffe9485a93aa9685a1c7f91, type: 3}
+      propertyPath: burstVertical
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9142570340206917765, guid: 5d1b44018ffe9485a93aa9685a1c7f91, type: 3}
+      propertyPath: distanceFromGround
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9142570340206917765, guid: 5d1b44018ffe9485a93aa9685a1c7f91, type: 3}
+      propertyPath: groundLayer.m_Bits
+      value: 128
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -267785,6 +267785,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EndingSequence
   panel: {fileID: 1108695235}
   finishLine: {fileID: 1054269748}
+  reader: {fileID: 11400000, guid: 2f7dcd2e15ae1d440957fb5fe3c6f17b, type: 2}
   timeToWait: 0
 --- !u!114 &327485454
 MonoBehaviour:
@@ -1555557,6 +1555558,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 664809dc116f04f689e894b584f11deb, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1904166193}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 664809dc116f04f689e894b584f11deb, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1904166198}
   m_SourcePrefab: {fileID: 100100000, guid: 664809dc116f04f689e894b584f11deb, type: 3}
 --- !u!4 &1904166191 stripped
 Transform:
@@ -1555608,6 +1555612,7 @@ MonoBehaviour:
   forwardBurst: 10
   burstVertical: 10
   burstFade: 20
+  decayRate: 0
   rampTime: 5
   rampStartPercent: 0.084
   groundLayer:
@@ -1555692,6 +1555697,25 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1904166198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1904166192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 539d88d4015af408e92402a3c98690d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpeedDeath
+  player: {fileID: 1904166194}
+  finishLine: {fileID: 1054269748}
+  speedThreshold: 9
+  timeAllowedBelow: 2.5
+  deathSound: {fileID: 11400000, guid: ef232d9b0320b4b0697d0484a926cdfb, type: 2}
+  restartOnDeath: 1
+  restartDelay: 2
 --- !u!1 &1904230993
 GameObject:
   m_ObjectHideFlags: 0

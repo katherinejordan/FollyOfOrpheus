@@ -14,6 +14,8 @@ public class PlayerController : MonoBehaviour, IBoostable
     [SerializeField] private float burstVertical = 5;
     [SerializeField] private float burstFade = 20;
 
+    [SerializeField] private float decayRate;
+
     [Header("Start Ramp")]
     [Tooltip("Seconds to reach full speed at the start of a run.")]
     [SerializeField] private float rampTime = 3f;
@@ -97,10 +99,21 @@ public class PlayerController : MonoBehaviour, IBoostable
         StopRun();
     }
 
+    public bool IsRamping()
+    {
+        return rampTimer < rampTime;
+    }
+
     private void FixedUpdate()
     {
         rb.MoveRotation(Quaternion.Euler(0f, totalTurn, 0f));
         rampTimer += Time.fixedDeltaTime;
+        
+        if (!IsRamping())
+        {
+            speed = Mathf.Max(speed - decayRate * Time.fixedDeltaTime, minSpeed);
+        }
+
         velocity = transform.forward * speed * RampFactor + burstVelocity;
         float currentFall = rb.linearVelocity.y;
         velocity.y = currentFall;
@@ -123,6 +136,7 @@ public class PlayerController : MonoBehaviour, IBoostable
 
     public void AttackBurst(Vector2 input)
     {
+        if (!enabled) return;
         AttackDirection dir = Enemy.AttackDirectionFromVector2(input);
 
         switch (dir)

@@ -5,7 +5,12 @@ public class MainMenuManager : MonoBehaviour
 {
     [SerializeField] GameObject mainMenu;
     [SerializeField] GameObject settingsMenu;
+    [SerializeField] InputReader reader;
 
+    private void OnEnable()
+    {
+        reader.EnablePlayerActions();
+    }
     public void Play()
     {
         SceneManager.LoadScene("Underworld");
