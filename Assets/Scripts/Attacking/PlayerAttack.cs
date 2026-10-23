@@ -10,6 +10,7 @@ public class PlayerAttack : MonoBehaviour, IBoostable
     [SerializeField] LayerMask enemyLayer;
     [SerializeField] float windowLength = 0.25f;
     [SerializeField] float missPenalty = 5;
+    [SerializeField] float cooldown = 0.5f;
 
     private bool attackHit;
     private bool isAttacking;
@@ -68,6 +69,7 @@ public class PlayerAttack : MonoBehaviour, IBoostable
         }
 
         if (!attackHit) controller.Slow(missPenalty);
+        yield return new WaitForSeconds(cooldown);
         isAttacking = false;
     }
 }

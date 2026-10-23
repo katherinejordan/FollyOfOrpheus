@@ -45,7 +45,7 @@ public class PlayerController : MonoBehaviour, IBoostable
         totalTurn += reader.LookInput.x * mouseSens; //get the turn amount once per frame
         totalTurn = Mathf.Clamp(totalTurn, startAngle - 45f, startAngle + 45f);
 
-        animator.SetFloat("Speed", speed);
+        animator.SetFloat("Speed", speed / maxSpeed);
     }
 
     private void FixedUpdate()
@@ -88,16 +88,23 @@ public class PlayerController : MonoBehaviour, IBoostable
                 break;
             case AttackDirection.VERTICAL:
                 burstVelocity = Vector3.zero;
+                bool addedForce = false;
                 if (input.y > 0 && IsGrounded())
                 {
                     rb.AddForce(Vector3.up * input.y * burstVertical, ForceMode.VelocityChange);
+                    addedForce = true;
                 }
                 else if (input.y < 0)
                 {
                     rb.AddForce(Vector3.up * input.y * burstVertical, ForceMode.VelocityChange);
+                    addedForce = true;
+
                 }
-                attack = input.y > 0 ? "AttackUp" : "AttackDown";
-                animator.CrossFadeInFixedTime(attack, .05f);
+                if (addedForce)
+                {
+                    attack = input.y > 0 ? "AttackUp" : "AttackDown";
+                    animator.CrossFadeInFixedTime(attack, .05f);
+                }
                 break;
         }
     }
