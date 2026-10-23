@@ -10,25 +10,35 @@ public class EndingSequence : MonoBehaviour
 
     private void OnEnable()
     {
-        panel.SetActive(false);
+        Time.timeScale = 1f;
+
+        if (panel) panel.SetActive(false);
+
+        if (finishLine == null)
+        {
+            Debug.LogError("EndingSequence: finishLine reference is missing!");
+            return;
+        }
         finishLine.PlayerFinished += GoToCredits;
     }
 
     private void OnDisable()
     {
-        finishLine.PlayerFinished -= GoToCredits;
+        if (finishLine != null) finishLine.PlayerFinished -= GoToCredits;
     }
 
-    private void GoToCredits() 
+    private void GoToCredits()
     {
         StartCoroutine(CreditsCoroutine());
     }
 
     private IEnumerator CreditsCoroutine()
     {
-        panel.SetActive(true);
-        yield return new WaitForSeconds(timeToWait);
+        if (panel)
+        {
+            panel.SetActive(true);
+            yield return new WaitForSecondsRealtime(timeToWait);
+        }
         SceneManager.LoadScene("Credits");
     }
-
 }
