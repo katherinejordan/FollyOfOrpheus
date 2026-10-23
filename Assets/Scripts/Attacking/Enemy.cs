@@ -23,15 +23,17 @@ public abstract class Enemy : MonoBehaviour, IAttackable
     private IBoostable player;
     public void Attack(Vector2 dir, Vector3 pos, IBoostable boostable)
     {
-        
-        AttackDirection aDir = AttackDirectionFromVector2(dir);
-        Debug.Log(aDir.ToString());
 
-        if (aDir == attackableDirection)
-        {
-            player = boostable;
-            AttackInternal(aDir, pos);
-        }
+        AttackDirection aDir = AttackDirectionFromVector2(dir);
+
+        // if (aDir == attackableDirection)
+        // {
+        //     player = boostable;
+        //     AttackInternal(aDir, pos);
+        // }
+
+        player = boostable;
+        AttackInternal(aDir, pos);
     }
 
     protected virtual void AttackInternal(AttackDirection dir, Vector3 pos)
@@ -53,7 +55,6 @@ public abstract class Enemy : MonoBehaviour, IAttackable
 
     protected virtual void Die()
     {
-        Debug.Log("hit");
         animator.SetBool("Dying", true);
         Destroy(gameObject, .2f);
     }

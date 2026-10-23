@@ -11,6 +11,7 @@ public class PlaceRocks : MonoBehaviour
     [SerializeField] private Vector2 ySizeRange;
     [SerializeField] private Vector2 tiltRange;
     [SerializeField] private Vector2 downRange;
+    [SerializeField] private Vector3 startPosition;
 
     [SerializeField] private Transform rockParent;
 
@@ -20,7 +21,10 @@ public class PlaceRocks : MonoBehaviour
         Rid();
         Bounds bounds = GetComponent<MeshFilter>().sharedMesh.bounds;
 
-        Vector3 start = transform.TransformPoint(new Vector3(bounds.center.x, bounds.max.y, bounds.min.z));
+        Vector3 localStart = new Vector3(bounds.center.x, bounds.max.y, bounds.min.z);
+        transform.position += startPosition - transform.TransformPoint(localStart);
+
+        Vector3 start = transform.TransformPoint(localStart);
         Vector3 end = transform.TransformPoint(new Vector3(bounds.center.x, bounds.max.y, bounds.max.z));
 
         float length = Vector3.Distance(start, end);
