@@ -39,6 +39,15 @@ public class PlayerController : MonoBehaviour, IBoostable
     public float MaxSpeed => maxSpeed;
     private float RampFactor => Mathf.SmoothStep(rampStartPercent, 1f, rampTimer / Mathf.Max(rampTime, 0.01f));
 
+    [Header("Bad Practice BUT I DONT GIVE A GAF")]
+    public SoundData attackSound1;
+    public SoundData attackSound2;
+    public void PlaySound(SoundData sound)
+    {
+        AudioManager.Instance?.Play(sound);
+    }
+
+
     private void OnEnable()
     {
         totalTurn = transform.eulerAngles.y; //stop from snapping to 0
@@ -93,11 +102,13 @@ public class PlayerController : MonoBehaviour, IBoostable
             case AttackDirection.DIRECT:
                 burstVelocity = transform.forward * forwardBurst;
                 animator.CrossFadeInFixedTime("AttackForward", .05f);
+                PlaySound(attackSound1);
                 break;
             case AttackDirection.HORIZONTAL:
                 burstVelocity = transform.right * input.x * sideBurst;
                 string attack = input.x > 0 ? "AttackRight" : "AttackLeft";
                 animator.CrossFadeInFixedTime(attack, .05f);
+                PlaySound(attackSound1);
                 break;
             case AttackDirection.VERTICAL:
                 burstVelocity = Vector3.zero;
@@ -117,6 +128,7 @@ public class PlayerController : MonoBehaviour, IBoostable
                 {
                     attack = input.y > 0 ? "AttackUp" : "AttackDown";
                     animator.CrossFadeInFixedTime(attack, .05f);
+                    PlaySound(attackSound2);
                 }
                 break;
         }
