@@ -136,7 +136,6 @@ public class InputReader : ScriptableObject, IInputReader, IPlayerActions, IUIAc
 
     public void OnPause(InputAction.CallbackContext context)
     {
-        Debug.Log("hi");
         if (context.performed) PausePressed.Invoke();
     }
 
