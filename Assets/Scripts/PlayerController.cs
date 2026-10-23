@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour, IBoostable
     [SerializeField] private InputReader reader;
     private Rigidbody rb;
     private Animator animator;
+    private string[] attackStates = { "AttackForward", "AttackUp", "AttackRight", "AttackLeft", "AttackDown" };
     private Collider col;
     private float totalTurn;
     private float startAngle;
@@ -43,6 +44,8 @@ public class PlayerController : MonoBehaviour, IBoostable
     {
         totalTurn += reader.LookInput.x * mouseSens; //get the turn amount once per frame
         totalTurn = Mathf.Clamp(totalTurn, startAngle - 45f, startAngle + 45f);
+
+        animator.SetFloat("Speed", speed);
     }
 
     private void FixedUpdate()
@@ -70,9 +73,22 @@ public class PlayerController : MonoBehaviour, IBoostable
 
     public void AttackBurst(Vector2 input)
     {
+        AttackDirection dir = Enemy.AttackDirectionFromVector2(input);
+
+        switch (dir)
+        {
+            case AttackDirection.DIRECT:
+                burstVelocity = transform.forward * burstSize;
+                
+                break;
+            case AttackDirection.HORIZONTAL:
+                break;
+            case AttackDirection.VERTICAL:
+                break;
+        }
         if (input.x == 0 && input.y == 0) //forward burst
         {
-            burstVelocity = transform.forward * burstSize;
+            
         }
         else if (input.x != 0) //A or D
         {
