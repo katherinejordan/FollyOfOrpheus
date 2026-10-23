@@ -12,6 +12,8 @@ public class SetupPath : MonoBehaviour
     [SerializeField] private Vector2 tiltRange;
     [SerializeField] private Vector2 downRange;
     [SerializeField] private Vector3 startPosition;
+    [SerializeField] private GameObject slowWallPrefab;
+    [SerializeField] private float slowWallLength;
 
     [SerializeField] private Transform rockParent;
     [SerializeField] private Transform finish;
@@ -35,11 +37,24 @@ public class SetupPath : MonoBehaviour
         Vector3 along = (end - start).normalized;
         float halfWidth = bounds.extents.x * transform.lossyScale.x;
 
+        TileSlowWalls(start, along, length);
+
         for (float d = 0f; d <= length; d += stepSize)
         {
             Vector3 point = start + along * d;
             SpawnRock(point, along, -1f, halfWidth);
             SpawnRock(point, along, 1f, halfWidth);
+        }
+    }
+
+    private void TileSlowWalls(Vector3 start, Vector3 along, float length)
+    {
+        int count = Mathf.CeilToInt(length / slowWallLength);
+
+        for (int i = 0; i < count; i++)
+        {
+            Vector3 position = start + along * (slowWallLength * (i + 0.5f));
+            Instantiate(slowWallPrefab, position, transform.rotation, rockParent);
         }
     }
 
@@ -58,7 +73,7 @@ public class SetupPath : MonoBehaviour
             UnityEngine.Random.Range(0f, 360f),
             rand(tiltRange));
 
-        Quaternion rotation = randomRot;
+        Quaternion rotation = transform.localRotation * randomRot;
         GameObject prefab = rockPrefabs[UnityEngine.Random.Range(0, rockPrefabs.Length)];
         GameObject rock = Instantiate(prefab, position, rotation, rockParent);
 
