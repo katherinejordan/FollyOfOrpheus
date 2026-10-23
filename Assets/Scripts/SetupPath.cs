@@ -1,4 +1,6 @@
 using System;
+using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SetupPath : MonoBehaviour
@@ -18,7 +20,22 @@ public class SetupPath : MonoBehaviour
     [SerializeField] private Transform rockParent;
     [SerializeField] private Transform finish;
 
-    [ContextMenu("Place Rocks")]
+    [Serializable]
+    private struct EnemyConfig
+    {
+        public float weight; // spawnchance
+        public GameObject prefab;
+        public bool randX;
+        public bool randY;
+        public Vector2 xRange;
+        public Vector2 yRange;
+    }
+    [Header("Enemy Stuff")]
+    [SerializeField] private EnemyConfig[] enemies;
+    [SerializeField] private Vector2 enemySpacing;
+    [SerializeField] private float enemyStartDistance;
+
+    [ContextMenu("Place")]
     private void Place()
     {
         Rid();
@@ -45,6 +62,48 @@ public class SetupPath : MonoBehaviour
             SpawnRock(point, along, -1f, halfWidth);
             SpawnRock(point, along, 1f, halfWidth);
         }
+
+        PlaceEnemies(start, along, length);
+    }
+
+    private void PlaceEnemies(Vector3 start, Vector3 along, float length)
+    {
+        if (enemies.Length == 0)
+            return;
+
+        if (Mathf.Min(enemySpacing.x, enemySpacing.y) <= 0f)
+        {
+            return;
+        }
+
+        for (float d = enemyStartDistance; d <= length; d += rand(enemySpacing))
+        {
+            EnemyConfig enemy = PickEnemy();
+            float x = enemy.randX ? rand(enemy.xRange) : 0f;
+            float y = enemy.randY ? rand(enemy.yRange) : 0f;
+
+            Vector3 position = start
+                + along * d
+                + transform.right * x
+                + transform.up * y;
+
+            Instantiate(enemy.prefab, position, transform.rotation, rockParent);
+        }
+    }
+
+    private EnemyConfig PickEnemy()
+    {
+        float total = enemies.Sum(e => e.weight);
+
+        float roll = UnityEngine.Random.Range(0f, total);
+        foreach (EnemyConfig enemy in enemies)
+        {
+            roll -= enemy.weight;
+            if (roll < 0f)
+                return enemy;
+        }
+
+        return enemies[enemies.Length - 1];
     }
 
     private void TileSlowWalls(Vector3 start, Vector3 along, float length)

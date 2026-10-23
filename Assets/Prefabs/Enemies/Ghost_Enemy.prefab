@@ -880,7 +880,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PierceEnemy
   attackIndicator: {fileID: 0}
   attackableDirection: 0
-  baseSpeedGain: 100
+  baseSpeedGain: 10
   maxDistance: 2
   perfectThreshold: 0
   pierceTransform: {fileID: 3955749870379803283}
