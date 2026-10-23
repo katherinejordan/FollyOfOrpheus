@@ -10,16 +10,22 @@ public class PlayerController : MonoBehaviour, IBoostable
     [SerializeField] private float minSpeed = 7;
     [SerializeField] private float mouseSens = 0.1f;
     [SerializeField] private float burstSize = 5;
+    [SerializeField] private float burstVertical = 5;
     [SerializeField] private float burstFade = 20;
+
+    [Header("Ground Check")]
+    [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private float distanceFromGround = 0.15f;
 
     [Header("Input")]
     [SerializeField] private InputReader reader;
     private Rigidbody rb;
     private Animator animator;
+    private Collider col;
     private float totalTurn;
     private float startAngle;
     private Vector3 velocity;
-    private float currentBurst;
+    private Vector3 burstVelocity;
 
     private void OnEnable()
     {
@@ -27,6 +33,7 @@ public class PlayerController : MonoBehaviour, IBoostable
         startAngle = totalTurn;
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
+        col = GetComponentInChildren<Collider>();
 
         Cursor.lockState = CursorLockMode.Locked;
         animator.SetBool("IsRunning", true);
@@ -41,12 +48,11 @@ public class PlayerController : MonoBehaviour, IBoostable
     private void FixedUpdate()
     {
         rb.MoveRotation(Quaternion.Euler(0f, totalTurn, 0f));
-        
-        velocity = transform.forward * (speed + currentBurst);
+        velocity = transform.forward * speed + burstVelocity;
         float currentFall = rb.linearVelocity.y;
         velocity.y = currentFall;
         rb.linearVelocity = velocity;
-        currentBurst = Mathf.MoveTowards(currentBurst, 0, burstFade * Time.fixedDeltaTime);
+        burstVelocity = Vector3.MoveTowards(burstVelocity, Vector3.zero, burstFade * Time.fixedDeltaTime);
     }
 
     public void Boost(float boostAmount, AccuracyLevel level)
@@ -62,8 +68,35 @@ public class PlayerController : MonoBehaviour, IBoostable
         Debug.Log($"Missing speed: {speed}");
     }
 
-    public void AttackBurst()
+    public void AttackBurst(Vector2 input)
     {
-        currentBurst = burstSize;
+        if (input.x == 0 && input.y == 0) //forward burst
+        {
+            burstVelocity = transform.forward * burstSize;
+        }
+        else if (input.x != 0) //A or D
+        {
+            burstVelocity = transform.right * input.x * burstSize;
+        }
+        else // W or S
+        {
+            burstVelocity = Vector3.zero;
+        }
+
+        if (input.y > 0 && IsGrounded())
+        {
+            rb.AddForce(Vector3.up * input.y * burstVertical, ForceMode.VelocityChange);
+        }
+        else if (input.y < 0)
+        {
+            rb.AddForce(Vector3.up * input.y * burstVertical, ForceMode.VelocityChange);
+        }
+    }
+
+    private float GroundRayLength => col.bounds.extents.y + distanceFromGround;
+
+    private bool IsGrounded()
+    {
+        return Physics.Raycast(col.bounds.center, Vector3.down, GroundRayLength, groundLayer);
     }
 }

@@ -2,12 +2,12 @@ using UnityEngine;
 
 public class SlowZone : MonoBehaviour
 {
-    [SerializeField] float enterPentalty = 10;
-    void OnTriggerEnter(Collider other)
+    [SerializeField] float slowPerSecond = 10;
+    void OnTriggerStay(Collider other)
     {
         if (other.TryGetComponent(out PlayerController pc))
         {
-            pc.Slow(enterPentalty);
+            pc.Slow(slowPerSecond * Time.fixedDeltaTime);
         }
     }
 }
