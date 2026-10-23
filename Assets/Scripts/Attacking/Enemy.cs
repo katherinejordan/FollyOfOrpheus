@@ -13,6 +13,13 @@ public abstract class Enemy : MonoBehaviour, IAttackable
     [SerializeField] protected float maxDistance;
     [SerializeField] protected float perfectThreshold;
 
+    private Animator animator;
+
+    private void Awake()
+    {
+        animator = GetComponent<Animator>();
+    }
+
     private IBoostable player;
     public void Attack(Vector2 dir, Vector3 pos, IBoostable boostable)
     {
@@ -46,7 +53,9 @@ public abstract class Enemy : MonoBehaviour, IAttackable
 
     protected virtual void Die()
     {
-        Destroy(gameObject);
+        Debug.Log("hit");
+        animator.SetBool("Dying", true);
+        Destroy(gameObject, .2f);
     }
 
     public static AttackDirection AttackDirectionFromVector2(Vector2 vector)
