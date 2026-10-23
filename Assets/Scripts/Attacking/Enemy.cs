@@ -16,7 +16,10 @@ public abstract class Enemy : MonoBehaviour, IAttackable
     private IBoostable player;
     public void Attack(Vector2 dir, Vector3 pos, IBoostable boostable)
     {
+        
         AttackDirection aDir = AttackDirectionFromVector2(dir);
+        Debug.Log(aDir.ToString());
+
         if (aDir == attackableDirection)
         {
             player = boostable;

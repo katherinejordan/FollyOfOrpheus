@@ -9,7 +9,8 @@ public class PlayerController : MonoBehaviour, IBoostable
     [SerializeField] private float maxSpeed = 150;
     [SerializeField] private float minSpeed = 7;
     [SerializeField] private float mouseSens = 0.1f;
-    [SerializeField] private float burstSize = 5;
+    [SerializeField] private float sideBurst = 5;
+    [SerializeField] private float forwardBurst = 5;
     [SerializeField] private float burstVertical = 5;
     [SerializeField] private float burstFade = 20;
 
@@ -21,7 +22,6 @@ public class PlayerController : MonoBehaviour, IBoostable
     [SerializeField] private InputReader reader;
     private Rigidbody rb;
     private Animator animator;
-    private string[] attackStates = { "AttackForward", "AttackUp", "AttackRight", "AttackLeft", "AttackDown" };
     private Collider col;
     private float totalTurn;
     private float startAngle;
@@ -78,34 +78,27 @@ public class PlayerController : MonoBehaviour, IBoostable
         switch (dir)
         {
             case AttackDirection.DIRECT:
-                burstVelocity = transform.forward * burstSize;
-                
+                burstVelocity = transform.forward * forwardBurst;
+                animator.CrossFadeInFixedTime("AttackForward", .05f);
                 break;
             case AttackDirection.HORIZONTAL:
+                burstVelocity = transform.right * input.x * sideBurst;
+                string attack = input.x > 0 ? "AttackRight" : "AttackLeft";
+                animator.CrossFadeInFixedTime(attack, .05f);
                 break;
             case AttackDirection.VERTICAL:
+                burstVelocity = Vector3.zero;
+                if (input.y > 0 && IsGrounded())
+                {
+                    rb.AddForce(Vector3.up * input.y * burstVertical, ForceMode.VelocityChange);
+                }
+                else if (input.y < 0)
+                {
+                    rb.AddForce(Vector3.up * input.y * burstVertical, ForceMode.VelocityChange);
+                }
+                attack = input.y > 0 ? "AttackUp" : "AttackDown";
+                animator.CrossFadeInFixedTime(attack, .05f);
                 break;
-        }
-        if (input.x == 0 && input.y == 0) //forward burst
-        {
-            
-        }
-        else if (input.x != 0) //A or D
-        {
-            burstVelocity = transform.right * input.x * burstSize;
-        }
-        else // W or S
-        {
-            burstVelocity = Vector3.zero;
-        }
-
-        if (input.y > 0 && IsGrounded())
-        {
-            rb.AddForce(Vector3.up * input.y * burstVertical, ForceMode.VelocityChange);
-        }
-        else if (input.y < 0)
-        {
-            rb.AddForce(Vector3.up * input.y * burstVertical, ForceMode.VelocityChange);
         }
     }
 

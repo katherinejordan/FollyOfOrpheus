@@ -261,7 +261,7 @@ Transform:
   m_GameObject: {fileID: 172062425}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.78726, y: 0.37117004, z: 1.02676}
+  m_LocalPosition: {x: 0, y: 1, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -362,7 +362,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &352422532
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -739,8 +739,8 @@ Light:
   m_Enabled: 1
   serializedVersion: 12
   m_Type: 0
-  m_Color: {r: 0.3730865, g: 0.40620714, b: 0.6037736, a: 1}
-  m_Intensity: 3076.7
+  m_Color: {r: 0.33132538, g: 0, b: 0.8301887, a: 1}
+  m_Intensity: 10000
   m_Range: 200
   m_SpotAngle: 179
   m_InnerSpotAngle: 81.828545
@@ -1998,7 +1998,8 @@ MonoBehaviour:
   maxSpeed: 150
   minSpeed: 7
   mouseSens: 0.05
-  burstSize: 10
+  sideBurst: 20
+  forwardBurst: 10
   burstVertical: 5
   burstFade: 20
   groundLayer:
@@ -2359,13 +2360,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1609513462}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -3.08, z: 0}
+  m_LocalRotation: {x: -0.078459024, y: 0, z: 0, w: 0.99691737}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 1, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -9, y: 0, z: 0}
 --- !u!1 &1883606098
 GameObject:
   m_ObjectHideFlags: 0
