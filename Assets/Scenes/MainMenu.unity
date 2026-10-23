@@ -1214,6 +1214,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MainMenuManager
   mainMenu: {fileID: 216499613}
   settingsMenu: {fileID: 107104074}
+  reader: {fileID: 11400000, guid: 2f7dcd2e15ae1d440957fb5fe3c6f17b, type: 2}
 --- !u!1 &26277706
 GameObject:
   m_ObjectHideFlags: 0
@@ -36025,6 +36026,9 @@ MonoBehaviour:
   slowWallLength: 10000
   rockParent: {fileID: 1194996130}
   finish: {fileID: 4250591601807756969, guid: 27ed44ee5c7634c61aa894f20f486b56, type: 3}
+  enemies: []
+  enemySpacing: {x: 0, y: 0}
+  enemyStartDistance: 0
 --- !u!114 &910601594
 MonoBehaviour:
   m_ObjectHideFlags: 0
