@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: down
   m_EditorClassIdentifier: Assembly-CSharp::SoundData
   clips:
-  - {fileID: 8300000, guid: f0d0e9753e19a4cd38bf84f4cac8d889, type: 3}
+  - {fileID: 8300000, guid: ab0702cef3c184d04ae408e75b0cd1c8, type: 3}
   mixerGroup: {fileID: -7034742878424322906, guid: d8fea968c259e4c509b72ac72a3a0f3c, type: 2}
   volume: 1
+  loop: 0
   pitchRange: {x: 0.95, y: 1.05}
   spatialBlend: 1
   minDistance: 1
