@@ -31,6 +31,14 @@ public class PauseManager : MonoBehaviour
 
     private void SetPaused(bool paused)
     {
+        if (paused)
+        {
+            reader.DisablePlayerActions();
+        }
+        else
+        {
+            reader.EnablePlayerActions();
+        }
         isPaused = paused;
         panel.SetActive(paused);
         Time.timeScale = paused ? 0f : 1f;
