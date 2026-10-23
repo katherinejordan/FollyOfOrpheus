@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class PlaceRocks : MonoBehaviour
+public class SetupPath : MonoBehaviour
 {
     [SerializeField] private GameObject[] rockPrefabs;
     [SerializeField] private float stepSize;
@@ -14,6 +14,7 @@ public class PlaceRocks : MonoBehaviour
     [SerializeField] private Vector3 startPosition;
 
     [SerializeField] private Transform rockParent;
+    [SerializeField] private Transform finish;
 
     [ContextMenu("Place Rocks")]
     private void Place()
@@ -22,10 +23,12 @@ public class PlaceRocks : MonoBehaviour
         Bounds bounds = GetComponent<MeshFilter>().sharedMesh.bounds;
 
         Vector3 localStart = new Vector3(bounds.center.x, bounds.max.y, bounds.min.z);
+        Vector3 localEnd = new Vector3(bounds.center.x, bounds.max.y, bounds.max.z);
+        finish.transform.position = localEnd;
         transform.position += startPosition - transform.TransformPoint(localStart);
 
         Vector3 start = transform.TransformPoint(localStart);
-        Vector3 end = transform.TransformPoint(new Vector3(bounds.center.x, bounds.max.y, bounds.max.z));
+        Vector3 end =  transform.TransformPoint(localEnd);
 
         float length = Vector3.Distance(start, end);
         Vector3 along = (end - start).normalized;
