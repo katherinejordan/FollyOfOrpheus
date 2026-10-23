@@ -131,6 +131,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: TempEnemy (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 9142570340206917765, guid: 5d1b44018ffe9485a93aa9685a1c7f91, type: 3}
+      propertyPath: speed
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 9142570340206917765, guid: 5d1b44018ffe9485a93aa9685a1c7f91, type: 3}
+      propertyPath: maxSpeed
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 9142570340206917765, guid: 5d1b44018ffe9485a93aa9685a1c7f91, type: 3}
+      propertyPath: burstSize
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 9142570340206917765, guid: 5d1b44018ffe9485a93aa9685a1c7f91, type: 3}
+      propertyPath: burstVertical
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9142570340206917765, guid: 5d1b44018ffe9485a93aa9685a1c7f91, type: 3}
+      propertyPath: distanceFromGround
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9142570340206917765, guid: 5d1b44018ffe9485a93aa9685a1c7f91, type: 3}
+      propertyPath: groundLayer.m_Bits
+      value: 128
+      objectReference: {fileID: 0}
     - target: {fileID: 6686719259775446605, guid: 1bf24705fde2a4153b469ca0687fad92, type: 3}
       propertyPath: m_LocalPosition.x
       value: 5.2076845
@@ -1135,7 +1159,7 @@ GameObject:
   - component: {fileID: 1609513465}
   - component: {fileID: 1609513464}
   - component: {fileID: 1609513463}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TempFloor
   m_TagString: Untagged
   m_Icon: {fileID: 0}

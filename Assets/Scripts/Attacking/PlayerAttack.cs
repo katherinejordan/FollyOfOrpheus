@@ -44,7 +44,7 @@ public class PlayerAttack : MonoBehaviour, IBoostable
 
     private IEnumerator AttackRoutine()
     {
-        controller.AttackBurst();
+        controller.AttackBurst(reader.MoveInput);
         isAttacking = true;
         attackHit = false;
 
