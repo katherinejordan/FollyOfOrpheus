@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e37c44315d6640379d8585c2ceb2121, type: 3}
+  m_Name: enemyhiy
+  m_EditorClassIdentifier: Assembly-CSharp::SoundData
+  clips:
+  - {fileID: 8300000, guid: ab3209aeee118463eab4e8805530086c, type: 3}
+  mixerGroup: {fileID: -7034742878424322906, guid: d8fea968c259e4c509b72ac72a3a0f3c, type: 2}
+  volume: 1
+  loop: 0
+  pitchRange: {x: 0.95, y: 1.05}
+  spatialBlend: 1
+  minDistance: 1
+  maxDistance: 30

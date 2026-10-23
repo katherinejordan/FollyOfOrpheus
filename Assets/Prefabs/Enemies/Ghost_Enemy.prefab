@@ -883,6 +883,7 @@ MonoBehaviour:
   baseSpeedGain: 10
   maxDistance: 2
   perfectThreshold: 0
+  deathsound: {fileID: 11400000, guid: be2eb8150e8cf4d6cb2bc564522cfaf7, type: 2}
   pierceTransform: {fileID: 3955749870379803283}
 --- !u!4 &3955749870379803283 stripped
 Transform:

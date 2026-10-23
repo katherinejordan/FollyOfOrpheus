@@ -15,6 +15,8 @@ public abstract class Enemy : MonoBehaviour, IAttackable
 
     private Animator animator;
 
+    public SoundData deathsound;
+
     private void Awake()
     {
         animator = GetComponent<Animator>();
@@ -56,6 +58,7 @@ public abstract class Enemy : MonoBehaviour, IAttackable
     protected virtual void Die()
     {
         animator.SetBool("Dying", true);
+        AudioManager.Instance?.Play(deathsound);
         Destroy(gameObject, .2f);
     }
 
